@@ -1,4 +1,4 @@
-#include "query-request.hpp"
+#include "async/query-request.hpp"
 #include <functional>
 #include <QDebug>
 

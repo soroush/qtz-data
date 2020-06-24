@@ -8,9 +8,9 @@
 #include <QSqlTableModel>
 #include <QFuture>
 #include <QFutureWatcher>
-#include <qtz/core/library.h>
+#include "data.hpp"
 
-class QTZ_SHARED_EXPORT IEditRecord : public QObject
+class QTZ_DATA_SHARED_EXPORT IEditRecord : public QObject
 {
     Q_OBJECT
 public:

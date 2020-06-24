@@ -1,7 +1,7 @@
-#include "sql-table-model.hpp"
-#include "query-request.hpp"
-#include "query-result.hpp"
-#include "query-thread.hpp"
+#include "async/sql-table-model.hpp"
+#include "async/query-request.hpp"
+#include "async/query-result.hpp"
+#include "async/query-thread.hpp"
 #include <algorithm>
 
 AsyncSqlTableModel::AsyncSqlTableModel(QObject *parent) :

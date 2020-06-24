@@ -1,8 +1,7 @@
-#include "query-thread.hpp"
-#include "query-worker.hpp"
-#include <QDebug>
-#include "query-request.hpp"
-#include "query-result.hpp"
+#include "async/query-thread.hpp"
+#include "async/query-worker.hpp"
+#include "async/query-request.hpp"
+#include "async/query-result.hpp"
 #include <QCoreApplication>
 
 QueryThread *QueryThread::this_thread = nullptr;

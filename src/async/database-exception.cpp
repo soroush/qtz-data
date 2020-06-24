@@ -1,4 +1,4 @@
-#include "database-exception.hpp"
+#include "async/database-exception.hpp"
 
 DatabaseException::DatabaseException(const QSqlError &e, const QString userMsg) :
     m_code(e.number()),

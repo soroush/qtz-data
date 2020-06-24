@@ -1,4 +1,4 @@
-#include "database-connection.hpp"
+#include "async/database-connection.hpp"
 #include <QDebug>
 
 QString DatabaseConnection::defaultHostName = "";

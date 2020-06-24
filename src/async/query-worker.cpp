@@ -1,9 +1,8 @@
-#include "query-worker.hpp"
-#include <QDebug>
-#include "database-connection.hpp"
-#include "query-result.hpp"
-#include "query-request.hpp"
-#include "query-thread.hpp"
+#include "async/query-worker.hpp"
+#include "async/database-connection.hpp"
+#include "async/query-result.hpp"
+#include "async/query-request.hpp"
+#include "async/query-thread.hpp"
 #include <QTime>
 
 const QString sqliteConnectionName = "query_thread_sqlite";

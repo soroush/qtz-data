@@ -1,5 +1,5 @@
-#include "query-result.hpp"
-#include "query-request.hpp"
+#include "async/query-result.hpp"
+#include "async/query-request.hpp"
 
 QueryResult::QueryResult(QObject *receiver, const QList<QSqlRecord> &records) :
     requestType(QueryRequest::None),

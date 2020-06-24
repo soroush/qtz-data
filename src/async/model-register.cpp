@@ -1,5 +1,5 @@
-#include "model-register.hpp"
-#include "sql-table-model.hpp"
+#include "async/model-register.hpp"
+#include "async/sql-table-model.hpp"
 #include <QDebug>
 
 AsyncModelRegister::AsyncModelRegister(QObject *parent, MarkMethod method) :
