@@ -1,16 +1,16 @@
 <RCC>
     <qresource prefix="/qtzdata">
-        <file>resources/backup-grammer.txt</file>
-        <file>resources/mysql_fetch_all_row_count.sql</file>
-        <file>resources/mysql_fetch_all_rows_procedure.sql</file>
-        <file>resources/mysql_fetch_field_count.sql</file>
-        <file>resources/mysql_fetch_tables.sql</file>
-        <file>resources/mysql_fk_fetch.sql</file>
-        <file>resources/sqlserver_fetch_all_row_count.sql</file>
-        <file>resources/sqlserver_fetch_field_count.sql</file>
-        <file>resources/sqlserver_fetch_rows_count.sql</file>
-        <file>resources/sqlserver_fetch_tables.sql</file>
-        <file>resources/sqlserver_fk_fetch.sql</file>
-        <file>resources/database-providers.xml</file>
+        <file>backup-grammer.txt</file>
+        <file>mysql_fetch_all_row_count.sql</file>
+        <file>mysql_fetch_all_rows_procedure.sql</file>
+        <file>mysql_fetch_field_count.sql</file>
+        <file>mysql_fetch_tables.sql</file>
+        <file>mysql_fk_fetch.sql</file>
+        <file>sqlserver_fetch_all_row_count.sql</file>
+        <file>sqlserver_fetch_field_count.sql</file>
+        <file>sqlserver_fetch_rows_count.sql</file>
+        <file>sqlserver_fetch_tables.sql</file>
+        <file>sqlserver_fk_fetch.sql</file>
+        <file>database-providers.xml</file>
     </qresource>
 </RCC>

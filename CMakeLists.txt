@@ -57,7 +57,9 @@ add_library (QtzData SHARED
     include/i-insert-record.hpp
     include/jalali-table-model.hpp
     include/table-node.hpp
-    ${OS_SOURCES})
+    ${OS_SOURCES}
+    # Resources
+    resources/QtzData.qrc)
 
 # Add 'd' suffix to debug builds
 set_property(TARGET QtzData PROPERTY DEBUG_POSTFIX d)
