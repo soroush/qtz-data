@@ -15,6 +15,9 @@ endif()
 
 # Check for dependencies
 find_package(Qt5 COMPONENTS Core Sql REQUIRED)
+if(NOT QTZ_LOCAL_BUILD)
+find_package(QtzCore CONFIG REQUIRED)
+endif()
 
 # Include directories
 include_directories("include")
@@ -101,4 +104,4 @@ install(EXPORT QtzDataConfig
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/QtzData.pc DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/pkgconfig)
 
 # Link againsg dependencies
-target_link_libraries(QtzData Qt5::Core Qt5::Sql)
+target_link_libraries(QtzData Qt5::Core Qt5::Sql Qtz::QtzCore)
