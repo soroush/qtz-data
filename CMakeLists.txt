@@ -15,21 +15,19 @@ endif()
 
 # Check for dependencies
 find_package(Qt5 COMPONENTS Core Sql REQUIRED)
+
 if(NOT QTZ_LOCAL_BUILD)
 find_package(QtzCore CONFIG REQUIRED)
 endif()
 
-# Include directories
-include_directories("include")
-
 # OS-dependent sources
 set(OS_SOURCES )
 if(WIN32)
-    list(APPEND OS_SOURCES QtzData.rc)
+    list(APPEND OS_SOURCES "${PROJECT_NAME}.rc")
 endif()
 
 # Define the library
-add_library (QtzData SHARED
+add_library (${PROJECT_NAME} SHARED
     src/async/database-connection.cpp
     src/async/database-exception.cpp
     src/async/model-register.cpp
@@ -62,46 +60,65 @@ add_library (QtzData SHARED
     include/table-node.hpp
     ${OS_SOURCES}
     # Resources
-    resources/QtzData.qrc)
+    resources/QtzData.qrc
+)
 
-# Add 'd' suffix to debug builds
-set_property(TARGET QtzData PROPERTY DEBUG_POSTFIX d)
+# Set properties
+set_target_properties(${PROJECT_NAME} PROPERTIES 
+    PROPERTIES VERSION 0.3.0
+    PROPERTIES SOVERSION 0
+    CXX_STANDARD 11
+    DEBUG_POSTFIX "d"
+    DEFINE_SYMBOL "QTZ_DATA_LIBRARY"
+)
 
-# Set version
-set_target_properties(QtzData PROPERTIES VERSION 0.3.0)
-set_target_properties(QtzData PROPERTIES SOVERSION 0)
+target_include_directories(${PROJECT_NAME}
+    PUBLIC 
+        $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}> 
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    PRIVATE 
+        ${CMAKE_CURRENT_SOURCE_DIR}/src
+)
 
-# pkg-config
-configure_file(QtzData.pc.in QtzData.pc @ONLY)
-
-# Define symbol exporter
-target_compile_definitions(QtzData PRIVATE -DQTZ_DATA_LIBRARY)
-target_compile_features(QtzData PRIVATE cxx_std_11)
+# Link against dependencies
+target_link_libraries(${PROJECT_NAME} PUBLIC Qt5::Core Qt5::Sql Qtz::QtzCore)
 
 # Install and export
 include(GNUInstallDirs)
-target_include_directories(QtzData PUBLIC  
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/>  
-    $<INSTALL_INTERFACE:include/>
+
+export(TARGETS ${PROJECT_NAME} FILE "${PROJECT_NAME}Targets.cmake")
+
+install(TARGETS ${PROJECT_NAME}
+    EXPORT "${PROJECT_NAME}Targets"
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 
-install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/qtz/data)
+install(DIRECTORY "include/" DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/qtz/data)
 
-install(TARGETS QtzData
-    EXPORT QtzDataConfig
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    ARCHIVE  DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    RUNTIME  DESTINATION ${CMAKE_INSTALL_BINDIR}
-    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
-    
-export(TARGETS QtzData FILE QtzDataConfig.cmake)
+include(CMakePackageConfigHelpers)
 
-install(EXPORT QtzDataConfig
-    FILE QtzDataConfig.cmake
+write_basic_package_version_file(
+    "${PROJECT_NAME}ConfigVersion.cmake"
+    VERSION ${PROJECT_VERSION}
+    COMPATIBILITY SameMajorVersion
+)
+
+install(EXPORT "${PROJECT_NAME}Targets"
+    FILE "${PROJECT_NAME}Targets.cmake"
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/
     NAMESPACE Qtz::
-    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/)
+)
 
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/QtzData.pc DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/pkgconfig)
+install(FILES "cmake/${PROJECT_NAME}Config.cmake" 
+    "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/
+)
 
-# Link againsg dependencies
-target_link_libraries(QtzData Qt5::Core Qt5::Sql Qtz::QtzCore)
+# pkg-config
+configure_file("${PROJECT_NAME}.pc.in" "${PROJECT_NAME}.pc" @ONLY)
+
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.pc"
+    DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/pkgconfig
+)
