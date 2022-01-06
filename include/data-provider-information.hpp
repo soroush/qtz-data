@@ -4,6 +4,7 @@
 #include <QtGlobal>
 #include <QString>
 #include <QVector>
+#include <QList>
 #include "data.hpp"
 #include "data-provider.hpp"
 
