@@ -3,7 +3,7 @@
 #include "async/query-result.hpp"
 #include "async/query-request.hpp"
 #include "async/query-thread.hpp"
-#include <QTime>
+#include <QElapsedTimer>
 
 const QString sqliteConnectionName = "query_thread_sqlite";
 const QString mysqlConnectionName = "query_thread_mysql";
@@ -16,7 +16,7 @@ QueryWorker::QueryWorker(QObject *parent) :
 
 void QueryWorker::execute(const QueryRequest &request)
 {
-    QTime t;
+    QElapsedTimer t;
     t.start();
 
     try

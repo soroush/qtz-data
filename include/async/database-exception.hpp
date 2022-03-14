@@ -13,7 +13,7 @@ class DatabaseException : private std::exception {
         const char *what() const throw();
         QSqlError getError() const;
     private:
-        int m_code;
+        QString m_code;
         QString m_message;
         QString m_userMessage;
         QSqlError m_error;
