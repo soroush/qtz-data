@@ -17,7 +17,7 @@ DataProviderInformation::DataProviderInformation() {
 void DataProviderInformation::initialize() {
     supportedSystems.clear();
     QList<DataProvider::Type> availableSystems = getAvailableSystems();
-    QFile providersFile(":/qtzdata/resources/database-providers.xml");
+    QFile providersFile(":/qtzdata/database-providers.xml");
     if(! providersFile.open(QFile::ReadOnly)) {
         std::cerr << "Unable to open database providers information file.";
     }
